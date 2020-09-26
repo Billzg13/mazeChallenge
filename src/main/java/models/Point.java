@@ -56,15 +56,20 @@ public class Point {
         return Objects.hash(row, column);
     }
 
-
     /**
-     *
+     * moves the Point
      * @param move
      * @return
      */
     public Point move(Move move){
-        String axis = move.getNoNameYet();
-        String operator = move.getOperator();
+        if (move == null)
+            throw new NullPointerException("no move is provided");
+
+        if (move.getNoNameYet().isBlank() || move.getOperator().isBlank())
+            throw new NullPointerException("move.something cant be null");
+
+        var axis = move.getNoNameYet();
+        var operator = move.getOperator();
 
         if (axis.equals("row")){
             if (operator.equals("-"))
@@ -73,13 +78,15 @@ public class Point {
 
             //then its row + 1
             return new Point(++row, column);
+        }if (axis.equals("column")){
+            if (operator.equals("-"))
+                //then its column - 1
+                return new Point(row, --column);
+            //then its column + 1
+            return new Point(row, ++column);
         }
-        if (operator.equals("-"))
-            //then its column - 1
-            return new Point(row, --column);
-
-        //then its column + 1
-        return new Point(row, ++column);
-    }
+        //if it comes here it means that the axis.equals has another value than the one allowed so we gotta throw an error
+        throw new IllegalArgumentException(" cant move this point");
+        }
 
 }
