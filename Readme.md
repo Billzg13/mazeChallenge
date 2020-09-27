@@ -1,12 +1,11 @@
 # Maze challenge
 
-
-
 ## Build project: 
- * mvn package
+ * in project root directory
+ * RUN mvn package
 
 ## RUN:  
-* java -cp ./target/maze-1.0-SNAPSHOT.jar Main
+* RUN java -cp ./target/maze-1.0-SNAPSHOT.jar Main
 
 
 

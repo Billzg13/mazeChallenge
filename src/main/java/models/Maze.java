@@ -69,19 +69,20 @@ public class Maze {
 
     public boolean findSolution() {
         try {
-            if (startingPosition == null || goalPosition == null){
+            if (startingPosition == null || goalPosition == null)
                 throw new NullPointerException("starting position or goalPosition is null");
-            }
+
             System.out.println("maze started!");
             var helpCounter = 1;
             var currentPosition = startingPosition;
-            //showMaze(currentPosition);
             System.out.println("the starting position is " + startingPosition + " the goal position is " + goalPosition);
 
             while (!currentPosition.equals(goalPosition)) {
                 if (helpCounter > 500) { //help a bit, because it might take too long on large numbers
+                    var goalViableMoves = findViableMoves(goalPosition);
+                    currentPosition.setRow(goalPosition.getRow());
                     currentPosition.setColumn(goalPosition.getColumn());
-                    currentPosition.setRow(goalPosition.getRow() + 1);
+                    currentPosition.move(goalViableMoves.get(0));
                     helpCounter = 0;
                 }
                 showMaze(currentPosition);
