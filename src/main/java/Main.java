@@ -13,6 +13,9 @@ public class Main {
         var userInputRows = getValidUserInput("rows");
         var userInputColumns = getValidUserInput("columns");
 
+        System.out.println("userInputRows = "+userInputRows);
+        System.out.println("userInputCols = "+userInputColumns);
+
         //if input is correct we go ahead and initialize the maze
         var maze = new Maze(userInputRows, userInputColumns);
 
@@ -22,7 +25,11 @@ public class Main {
 
         while (startingPosition.equals(goalPosition)){
             goalPosition = findRandomPoint(maze.getRows(), maze.getColumns());
+            System.out.println("goalPosition: "+goalPosition);
+            System.out.println("startingPosition: "+startingPosition);
         }
+        System.out.println("after postion inits x2");
+
 
         maze.setStartingPosition(startingPosition);
         maze.setGoalPosition(goalPosition);
@@ -35,16 +42,15 @@ public class Main {
     }
 
     /**
-     * Finds a random Point for the provided rows and columns
+     * Finds a random Point within the range of point(1 - rows, 1 - columns)
      * @param rows
      * @param col
-     * @return
+     * @return new Point
      */
     public static Point findRandomPoint(int rows, int col) {
         if (rows == 0 || col == 0)
             throw new NullPointerException("null exception");
-        var rand = new Random();
-        return new Point(rand.nextInt(rows - 1)+1, rand.nextInt(col -1)+1); // nextInt returns a random number from a range of 0 - value
+        return new Point(new Random().nextInt( rows )+1, new Random().nextInt(col )+1); // nextInt returns a random number from a range of 0 - value
     }
 
     /**

@@ -69,6 +69,9 @@ public class Maze {
 
     public boolean findSolution() {
         try {
+            if (startingPosition == null || goalPosition == null){
+                throw new NullPointerException("starting position or goalPosition is null");
+            }
             System.out.println("maze started!");
             var helpCounter = 1;
             var currentPosition = startingPosition;
@@ -95,17 +98,17 @@ public class Maze {
     //should we show the rows and columns ? probably remove the indexes because they look awful
     private void showMaze(Point currentPosition) {
         var result = "";
-        for (var i = 0; i <= rows; i++) {
+        for (var i = 1; i <= rows; i++) {
             if (i != 0) {
                 result += i + "\t";
             } else {
                 result += " \t";
             }
             for (var j = 1; j <= columns; j++) {
-                if (i == 0) {
+                /*if (i == 0) {
                     result += j + " ";
                     continue;
-                }
+                } */
                 if (new Point(i, j).equals(currentPosition)) {
                     result += "C ";
                 } else if (new Point(i, j).equals(this.goalPosition)) {

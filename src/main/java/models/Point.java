@@ -6,7 +6,6 @@ public class Point {
     int row;
     int column;
 
-
     public Point() {
     }
 
@@ -75,15 +74,16 @@ public class Point {
             if (operator.equals("-"))
                 //then its row - 1
                 return new Point(--row, column);
-
             //then its row + 1
-            return new Point(++row, column);
+            if (operator.equals("+"))
+                return new Point(++row, column);
         }if (axis.equals("column")){
             if (operator.equals("-"))
                 //then its column - 1
                 return new Point(row, --column);
             //then its column + 1
-            return new Point(row, ++column);
+            if (operator.equals("+"))
+                return new Point(row, ++column);
         }
         //if it comes here it means that the axis.equals has another value than the one allowed so we gotta throw an error
         throw new IllegalArgumentException(" cant move this point");
